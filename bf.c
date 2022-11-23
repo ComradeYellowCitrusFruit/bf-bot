@@ -6,7 +6,7 @@
 int symcount = 0;
 int nextsymint = 0;
 char **symbols;
-char *nextsym = ".L0:";
+char *nextsym = ".L0";
 
 int main(int argc, char **argv)
 {
@@ -45,19 +45,26 @@ int main(int argc, char **argv)
             break;
 
             case '[':
-            fprintf(dest, "%s\n", nextsym);
             symcount++;
             symbols = realloc(symbols, sizeof(char*) * symcount);
             symbols[symcount-1] = nextsym;
             nextsymint++;
-            nextsym = malloc(snprintf(NULL, 0, ".L%i:", nextsymint));
+            nextsym = malloc(snprintf(NULL, 0, ".L%i", nextsymint));
+            sprintf(nextsym, ".L%i", nextsymint);
+            fprintf(dest, "\txor %%ebx, %%ebx\n\tcmp arr(, %%ecx), %%ebx\n\tje %s\n%s:\n", nextsym, symbols[symcount-1]);
+            symcount++;
+            symbols = realloc(symbols, sizeof(char*) * symcount);
+            symbols[symcount-1] = nextsym;
+            nextsymint++;
+            nextsym = malloc(snprintf(NULL, 0, ".L%i", nextsymint));
             sprintf(nextsym, ".L%i:", nextsymint);
             break;
 
             case ']':
-            fprintf(dest, "\txor %%ebx, %%ebx\n\tcmpb arr(, %%ecx), %%ebx\n\tjne %s\n", symbols[symcount-1]);
+            fprintf(dest, "\txor %%ebx, %%ebx\n\tcmpb arr(, %%ecx), %%ebx\n\tjne %s\n%s:\n", symbols[symcount-2], symbols[symcount-1]);
             free(symbols[symcount-1]);
-            symcount--;
+            free(symbols[symcount-2]);
+            symcount -= 2;
             symbols = realloc(symbols, symcount * sizeof(char*));
             break;
 
