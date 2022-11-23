@@ -57,7 +57,7 @@ int main(int argc, char **argv)
             symbols[symcount-1] = nextsym;
             nextsymint++;
             nextsym = malloc(snprintf(NULL, 0, ".L%i", nextsymint));
-            sprintf(nextsym, ".L%i:", nextsymint);
+            sprintf(nextsym, ".L%i", nextsymint);
             break;
 
             case ']':
