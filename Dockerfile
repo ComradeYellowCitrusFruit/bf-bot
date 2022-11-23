@@ -10,7 +10,7 @@ ENTRYPOINT /usr/bot/start.sh
 
 # Commands
 RUN mkdir /usr/bot
-RUN pip install discord
+RUN pip install discord.py
 RUN apt-get install gcc
 
 COPY start.sh /usr/bot
