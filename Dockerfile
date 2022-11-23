@@ -1,5 +1,5 @@
 # Base image
-FROM debian:bullseye
+FROM python:latest
 
 # Declare args
 ARG token
@@ -10,8 +10,6 @@ ENTRYPOINT /usr/bot/start.sh
 
 # Commands
 RUN mkdir /usr/bot
-RUN apt-get install python3
-RUN apt-get install python-pip
 RUN pip install discord
 RUN apt-get install gcc
 
