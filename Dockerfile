@@ -12,12 +12,12 @@ VOLUME /var/log
 ENTRYPOINT /usr/local/bot/start.sh 
 
 # Commands
-RUN mkdir /usr/local/bot
+RUN mkdir /usr/bot
 RUN apt-get install python
 RUN apt-get install pip
-RUN pip install brainfuck-interpreter
+RUN apt-get install gcc
 
-COPY start.sh /usr/local/bot
-COPY bot.py /usr/local/bot
-COPY bot.bf /usr/local/bot
-COPY bf.py /usr/local/bot
+COPY start.sh /usr/bot
+COPY bot.py /usr/bot
+COPY bot.bf /usr/bot
+COPY bf.c /usr/bot
