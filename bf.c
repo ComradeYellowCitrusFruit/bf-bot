@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
     symbols = malloc(1);
 
-    fprintf(dest, ".bss:\n\t.comm arr, 3000\n.text:\nstart:\n\txor %%ecx, %%ecx\n");
+    fprintf(dest, ".bss\n\t.comm arr, 3000\n.text\nstart:\n\txor %%ecx, %%ecx\n");
     int C;
     while((C = getc(src)) != EOF)
     {
