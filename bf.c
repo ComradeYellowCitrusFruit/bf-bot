@@ -85,6 +85,10 @@ int main(int argc, char **argv)
             break;
         }
     }
+    #ifdef __linux__
+    fprintf(dest, "\tmov $60, %%rax\n\txor %%rdi, %%rdi\n\tsyscall");
+    #endif
+    fclose(dest);
 
     return 0;
 }
