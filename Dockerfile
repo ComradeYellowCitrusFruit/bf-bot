@@ -5,9 +5,6 @@ FROM debian:latest
 ARG token
 ENV BOT_TOKEN=${token}
 
-# Declare volumes
-VOLUME /var/log
-
 # Entrypoint
 ENTRYPOINT /usr/bot/start.sh 
 
