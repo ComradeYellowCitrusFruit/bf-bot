@@ -71,13 +71,13 @@ int main(int argc, char **argv)
             /* System calls, my favorite */
             case '.':
             #ifdef __linux__
-            fprintf(dest, "\tpush %%ecx\n\tmov $0, %%rax\n\tmov $1, %%rdi\n\tlea arr(, %%ecx), %rsi\n\tmov $1, %%rdx\n\tsyscall\n\tpop %%ecx\n");
+            fprintf(dest, "\tpush %%ecx\n\tmov $0, %%rax\n\tmov $1, %%rdi\n\tlea arr(, %%ecx), %%rsi\n\tmov $1, %%rdx\n\tsyscall\n\tpop %%ecx\n");
             #endif
             break;
 
             case ',':
             #ifdef __linux__
-            fprintf(dest, "\tpush %%ecx\n\tmov $1, %%rax\n\tmov $0, %%rdi\n\tlea arr(, %%ecx), %rsi\n\tmov $1, %%rdx\n\tsyscall\n\tpop %%ecx\n");
+            fprintf(dest, "\tpush %%ecx\n\tmov $1, %%rax\n\tmov $0, %%rdi\n\tlea arr(, %%ecx), %%rsi\n\tmov $1, %%rdx\n\tsyscall\n\tpop %%ecx\n");
             #endif
             break;
 
